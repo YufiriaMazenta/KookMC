@@ -1,0 +1,4 @@
+prefix: '&8[&3Kook&bMC&8]&7'
+cmd:
+  no_perm: '%prefix% &c你没有权限使用此命令'
+  reload: '%prefix% &a重载成功'

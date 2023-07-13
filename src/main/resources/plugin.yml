@@ -1,0 +1,8 @@
+name: KookMC
+version: '${version}'
+main: com.github.yufiriamazenta.kookmc.KookMC
+api-version: '1.13'
+folia-supported: true
+commands:
+  kookmc:
+    permission: kookmc.cmd
