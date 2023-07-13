@@ -46,7 +46,7 @@ public final class KookMC extends JavaPlugin {
         ConfigurationSection botConfig = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "config.yml")).getConfigurationSection("kook-bot");
         try {
             MsgUtil.info("[KookMC] Kook bot starting");
-            kbcClient = new KBCClient(core, botConfig, null, getConfig().getString("kook-bot.token"));
+            kbcClient = new KBCClient(core, botConfig, getDataFolder(), getConfig().getString("kook-bot.token"));
             kbcClient.start();
         } catch (NullPointerException ignored) {}
         kbcClient.getCore().getEventManager().registerHandlers(kbcClient.getInternalPlugin(), KookEventForwarder.INSTANCE);
