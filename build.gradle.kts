@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.github.yufiriamazenta"
-version = "1.0.0-dev1"
+version = "1.0.0-dev2"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 

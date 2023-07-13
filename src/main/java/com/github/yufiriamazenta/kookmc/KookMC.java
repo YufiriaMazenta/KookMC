@@ -16,6 +16,7 @@ import snw.jkook.message.TextChannelMessage;
 import snw.jkook.message.component.MarkdownComponent;
 import snw.kookbc.impl.CoreImpl;
 import snw.kookbc.impl.KBCClient;
+import snw.kookbc.impl.command.CommandManagerImpl;
 
 import java.io.File;
 
@@ -50,6 +51,7 @@ public final class KookMC extends JavaPlugin {
             kbcClient.start();
         } catch (NullPointerException ignored) {}
         kbcClient.getCore().getEventManager().registerHandlers(kbcClient.getInternalPlugin(), KookEventForwarder.INSTANCE);
+        ((CommandManagerImpl) kbcClient.getInternalPlugin().getCore().getCommandManager()).getCommandMap().unregisterAll(kbcClient.getInternalPlugin());
         MsgUtil.info("[KookMC] Kook bot started");
         regDefCommand();
     }
@@ -73,6 +75,7 @@ public final class KookMC extends JavaPlugin {
                             String guildId = guild.getId();
                             String channelName = channel.getName();
                             String channelId = channel.getId();
+                            contentBuilder.append("此消息发送的用户ID: ").append(sender.getId()).append("\n");
                             contentBuilder.append("此消息所在的服务器的名称: ").append(guildName).append("\n");
                             contentBuilder.append("此消息所在的服务器的 ID: ").append(guildId).append("\n");
                             contentBuilder.append("此消息所在的频道的名称: ").append(channelName).append("\n");
