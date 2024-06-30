@@ -1,10 +1,8 @@
 name: KookMC
 version: '${version}'
-main: com.github.yufiriamazenta.kookmc.KookMC
+main: pers.yufiria.kookmc.KookMC
 api-version: '1.13'
 folia-supported: true
-depend:
-  - ParettiaLib
 commands:
   kookmc:
-    permission: kookmc.cmd
+    permission: kookmc.command

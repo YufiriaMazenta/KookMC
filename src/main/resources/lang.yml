@@ -1,4 +1,5 @@
-prefix: '&8[&3Kook&bMC&8]&7'
-cmd:
-  no_perm: '%prefix% &c你没有权限使用此命令'
-  reload: '%prefix% &a重载成功'
+bot:
+  loading: '&8[&3Kook&bMC&8]&7 机器人开始加载'
+  started: '&8[&3Kook&bMC&8]&7 机器人加载完毕'
+command:
+  reload: '&8[&3Kook&bMC&8] &a重载成功'
