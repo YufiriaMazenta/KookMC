@@ -4,12 +4,16 @@
 
 ### 使用方式
 
+将KookMC作为依赖插件使用
+
 ```kotlin
 repositories {
-    maven("https://jitpack.io")
+    maven("http://repo.crypticlib.com:8081/repository/maven-public/") {
+        isAllowInsecureProtocol = true
+    }
 }
 
 dependencies {
-    compileOnly("com.github.YufiriaMazenta:KookMC:<version>")
+    compileOnly("pers.yufiria:KookMC:1.0.0")
 }
 ```

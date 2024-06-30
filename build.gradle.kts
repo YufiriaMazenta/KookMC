@@ -31,8 +31,25 @@ dependencies {
 }
 
 publishing {
+    var repositoryUrl = "http://repo.crypticlib.com:8081/repository/"
+    repositoryUrl = if (rootProject.version.toString().endsWith("SNAPSHOT")) {
+        repositoryUrl.plus("maven-snapshots/")
+    } else {
+        repositoryUrl.plus("maven-releases/")
+    }
     publications.create<MavenPublication>("maven") {
         from(components["java"])
+        groupId = rootProject.group as String?
+    }
+    repositories {
+        maven {
+            url = uri(repositoryUrl)
+            isAllowInsecureProtocol = true
+            credentials {
+                username = project.findProperty("maven_username").toString()
+                password = project.findProperty("maven_password").toString()
+            }
+        }
     }
 }
 
