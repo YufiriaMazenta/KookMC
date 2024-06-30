@@ -77,4 +77,7 @@ tasks {
         relocate("crypticlib", "pers.yufiria.kookmc.libs.crypticlib")
         archiveFileName.set("${rootProject.name}-${version}.jar")
     }
+    compileJava {
+        dependsOn(clean)
+    }
 }
