@@ -30,7 +30,6 @@ public final class KookMC extends JavaPlugin {
     @Override
     public void onEnable() {
         INSTANCE = this;
-        saveDefaultConfig();
         langConfig = new ConfigWrapper(this, "lang.yml");
         initKookBC();
         Bukkit.getPluginCommand("kookmc").setExecutor(KookMCCommand.INSTANCE);
