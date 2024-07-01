@@ -32,8 +32,6 @@ public final class KookMC extends JavaPlugin {
         INSTANCE = this;
         langConfig = new ConfigWrapper(this, "lang.yml");
         initKookBC();
-        Bukkit.getPluginCommand("kookmc").setExecutor(KookMCCommand.INSTANCE);
-        Bukkit.getPluginCommand("kookmc").setTabCompleter(KookMCCommand.INSTANCE);
     }
 
     @Override
@@ -49,11 +47,13 @@ public final class KookMC extends JavaPlugin {
             MsgSender.info(Messages.botLoading.value());
             kbcClient = new KBCClient(core, botConfig, getDataFolder(), getConfig().getString("kook-bot.token"));
             kbcClient.start();
-        } catch (NullPointerException ignored) {}
-        kbcClient.getCore().getEventManager().registerHandlers(kbcClient.getInternalPlugin(), KookEventForwarder.INSTANCE);
-        ((CommandManagerImpl) kbcClient.getInternalPlugin().getCore().getCommandManager()).getCommandMap().unregisterAll(kbcClient.getInternalPlugin());
-        MsgSender.info(Messages.botStarted.value());
-        regDefCommand();
+            kbcClient.getCore().getEventManager().registerHandlers(kbcClient.getInternalPlugin(), KookEventForwarder.INSTANCE);
+            ((CommandManagerImpl) kbcClient.getInternalPlugin().getCore().getCommandManager()).getCommandMap().unregisterAll(kbcClient.getInternalPlugin());
+            MsgSender.info(Messages.botStarted.value());
+            regDefCommand();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     private void regDefCommand() {
