@@ -1,41 +1,38 @@
 package pers.yufiria.kookmc;
 
+import crypticlib.BukkitPlugin;
 import crypticlib.chat.MsgSender;
-import crypticlib.config.ConfigWrapper;
-import pers.yufiria.kookmc.command.KookMCCommand;
+import pers.yufiria.kookmc.config.BotConfigs;
 import pers.yufiria.kookmc.config.Messages;
 import pers.yufiria.kookmc.event.KookEventForwarder;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
 import snw.jkook.JKook;
 import snw.jkook.command.JKookCommand;
 import snw.jkook.config.ConfigurationSection;
 import snw.jkook.config.file.YamlConfiguration;
 import snw.jkook.entity.Guild;
-import snw.jkook.entity.channel.TextChannel;
-import snw.jkook.message.TextChannelMessage;
+import snw.jkook.entity.channel.Channel;
+import snw.jkook.message.ChannelMessage;
 import snw.jkook.message.component.MarkdownComponent;
 import snw.kookbc.impl.CoreImpl;
 import snw.kookbc.impl.KBCClient;
 import snw.kookbc.impl.command.CommandManagerImpl;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 
-public final class KookMC extends JavaPlugin {
+public final class KookMC extends BukkitPlugin {
 
     private static KookMC INSTANCE;
     private KBCClient kbcClient;
-    private ConfigWrapper langConfig;
 
     @Override
-    public void onEnable() {
+    public void enable() {
         INSTANCE = this;
-        langConfig = new ConfigWrapper(this, "lang.yml");
         initKookBC();
     }
 
     @Override
-    public void onDisable() {
+    public void disable() {
         disableKookBC();
     }
 
@@ -45,7 +42,7 @@ public final class KookMC extends JavaPlugin {
         ConfigurationSection botConfig = YamlConfiguration.loadConfiguration(new File(getDataFolder(), "bot-config.yml"));
         try {
             MsgSender.info(Messages.botLoading.value());
-            kbcClient = new KBCClient(core, botConfig, getDataFolder(), getConfig().getString("kook-bot.token"));
+            kbcClient = new KBCClient(core, botConfig, getDataFolder(), BotConfigs.token.value());
             kbcClient.start();
             kbcClient.getCore().getEventManager().registerHandlers(kbcClient.getInternalPlugin(), KookEventForwarder.INSTANCE);
             ((CommandManagerImpl) kbcClient.getInternalPlugin().getCore().getCommandManager()).getCommandMap().unregisterAll(kbcClient.getInternalPlugin());
@@ -64,22 +61,22 @@ public final class KookMC extends JavaPlugin {
                         String messageId = message.getId();
                         long timestamp = message.getTimeStamp();
                         contentBuilder.append("消息 ID: ").append(messageId).append("\n");
-                        contentBuilder.append("消息发送时的时间戳: ").append(timestamp);
+                        contentBuilder.append("消息发送时的时间: ").append(new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(timestamp));
 
-                        if (message instanceof TextChannelMessage) { // if this command was executed in a channel
+                        if (message instanceof ChannelMessage) { // if this command was executed in a channel
                             contentBuilder.append("\n"); // ignore this please, just for better look
 
-                            TextChannel channel = ((TextChannelMessage) message).getChannel();
+                            Channel channel = ((ChannelMessage) message).getChannel();
                             Guild guild = channel.getGuild();
                             String guildName = guild.getName();
                             String guildId = guild.getId();
                             String channelName = channel.getName();
                             String channelId = channel.getId();
-                            contentBuilder.append("此消息发送的用户ID: ").append(sender.getId()).append("\n");
+                            contentBuilder.append("此消息发送的用户: ").append(sender.getName()).append("\n");
                             contentBuilder.append("此消息所在的服务器的名称: ").append(guildName).append("\n");
                             contentBuilder.append("此消息所在的服务器的 ID: ").append(guildId).append("\n");
                             contentBuilder.append("此消息所在的频道的名称: ").append(channelName).append("\n");
-                            contentBuilder.append("此消息所在的频道的 ID: ").append(channelId);
+                            contentBuilder.append("此消息所在的频道的ID: ").append(channelId);
                         }
                         message.reply(new MarkdownComponent(contentBuilder.toString()));
                     }

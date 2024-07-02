@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "pers.yufiria"
-version = "1.0.0"
+version = "1.0.1"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 
@@ -75,6 +75,18 @@ tasks {
         relocate("com.google.gson", "pers.yufiria.kookmc.libs.gson")
         relocate("org.yaml.snakeyaml", "pers.yufiria.kookmc.libs.snakeyaml")
         relocate("crypticlib", "pers.yufiria.kookmc.libs.crypticlib")
+        relocate("com.google", "pers.yufiria.kookmc.libs.com.google")
+        relocate("org.spongepowered", "pers.yufiria.kookmc.libs.org.spongepowered")
+        relocate("org.slf4j", "pers.yufiria.kookmc.libs.org.slf4j")
+        relocate("org.intellij", "pers.yufiria.kookmc.libs.org.intellij")
+        relocate("org.jline", "pers.yufiria.kookmc.libs.org.jline")
+        relocate("org.checkframework", "pers.yufiria.kookmc.libs.org.checkframework")
+        relocate("org.apache", "pers.yufiria.kookmc.libs.org.apache")
+        relocate("org.fusesource", "pers.yufiria.kookmc.libs.org.fusesource")
+        relocate("net.minecrell", "pers.yufiria.kookmc.libs.net.minecrell")
+        relocate("net.kyori", "pers.yufiria.kookmc.libs.net.kyori")
+        relocate("kotlin", "pers.yufiria.kookmc.libs.kotlin")
+
         archiveFileName.set("${rootProject.name}-${version}.jar")
     }
     compileJava {
