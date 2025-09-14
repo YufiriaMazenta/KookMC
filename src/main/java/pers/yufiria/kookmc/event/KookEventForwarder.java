@@ -66,6 +66,11 @@ public enum KookEventForwarder implements Listener {
         callBukkitEvent(new KookChannelMessageUpdateEvent(event.getTimeStamp(), event.getChannel(), event.getMessageId(), event.getContent()));
     }
 
+    @EventHandler
+    public void onChannelMessageDelete(ChannelMessageDeleteEvent event) {
+        callBukkitEvent(new KookChannelMessageDeleteEvent(event.getTimeStamp(), event.getChannel(), event.getMessageId()));
+    }
+
     //以下为服务器相关事件
 
     @EventHandler

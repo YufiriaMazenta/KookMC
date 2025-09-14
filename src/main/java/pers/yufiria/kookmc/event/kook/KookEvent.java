@@ -9,7 +9,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class KookEvent extends Event {
 
-
     private final long timeStamp;
 
     protected KookEvent(long timeStamp) {

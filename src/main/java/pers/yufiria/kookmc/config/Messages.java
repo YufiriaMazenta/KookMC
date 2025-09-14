@@ -1,7 +1,7 @@
 package pers.yufiria.kookmc.config;
 
 import crypticlib.config.ConfigHandler;
-import crypticlib.config.entry.StringConfig;
+import crypticlib.config.node.impl.bukkit.StringConfig;
 
 @ConfigHandler(path = "lang.yml")
 public class Messages {

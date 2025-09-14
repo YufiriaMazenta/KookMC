@@ -5,18 +5,16 @@ plugins {
 }
 
 group = "pers.yufiria"
-version = "1.0.1"
+version = "1.0.2"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 
 repositories {
     mavenCentral()
+    //CrypticLib, FoliaAPI
+    maven("https://repo.crypticlib.com:8081/repository/maven-public/")
     maven("https://jitpack.io")
     maven("https://repo.papermc.io/repository/maven-public/")
-    //CrypticLib
-    maven("http://repo.crypticlib.com:8081/repository/maven-public/") {
-        isAllowInsecureProtocol = true
-    }
     //LiteCommands
     maven("https://repo.panda-lang.org/releases")
     maven("https://oss.sonatype.org/content/groups/public/")
@@ -24,11 +22,13 @@ repositories {
 
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
-    compileOnly("dev.folia:folia-api:1.20.1-R0.1-SNAPSHOT")
-    implementation("com.crypticlib:common:0.18.10")
-    implementation("com.github.SNWCreations:KookBC:0.30.2")
+    compileOnly("dev.folia:folia-api:1.20.2")
+    implementation("com.crypticlib:bukkit:1.13.11.0")
+    implementation("com.github.SNWCreations:KookBC:0.32.2")
 }
+
+java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.targetCompatibility = JavaVersion.VERSION_1_8
 
 publishing {
     var repositoryUrl = "http://repo.crypticlib.com:8081/repository/"
@@ -77,7 +77,7 @@ tasks {
         relocate("crypticlib", "pers.yufiria.kookmc.libs.crypticlib")
         relocate("com.google", "pers.yufiria.kookmc.libs.com.google")
         relocate("org.spongepowered", "pers.yufiria.kookmc.libs.org.spongepowered")
-        relocate("org.slf4j", "pers.yufiria.kookmc.libs.org.slf4j")
+
         relocate("org.intellij", "pers.yufiria.kookmc.libs.org.intellij")
         relocate("org.jline", "pers.yufiria.kookmc.libs.org.jline")
         relocate("org.checkframework", "pers.yufiria.kookmc.libs.org.checkframework")
@@ -86,7 +86,10 @@ tasks {
         relocate("net.minecrell", "pers.yufiria.kookmc.libs.net.minecrell")
         relocate("net.kyori", "pers.yufiria.kookmc.libs.net.kyori")
         relocate("kotlin", "pers.yufiria.kookmc.libs.kotlin")
-
+        exclude("META-INF/versions/**")
+        dependencies {
+            exclude(dependency("org.slf4j:slf4j-api:.*"))
+        }
         archiveFileName.set("${rootProject.name}-${version}.jar")
     }
     compileJava {

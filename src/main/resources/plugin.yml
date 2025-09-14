@@ -3,6 +3,4 @@ version: '${version}'
 main: pers.yufiria.kookmc.KookMC
 api-version: '1.13'
 folia-supported: true
-commands:
-  kookmc:
-    permission: kookmc.command
+author: Yufiria_
