@@ -81,7 +81,6 @@ tasks {
         relocate("org.intellij", "pers.yufiria.kookmc.libs.org.intellij")
         relocate("org.jline", "pers.yufiria.kookmc.libs.org.jline")
         relocate("org.checkframework", "pers.yufiria.kookmc.libs.org.checkframework")
-        relocate("org.apache", "pers.yufiria.kookmc.libs.org.apache")
         relocate("org.fusesource", "pers.yufiria.kookmc.libs.org.fusesource")
         relocate("net.minecrell", "pers.yufiria.kookmc.libs.net.minecrell")
         relocate("net.kyori", "pers.yufiria.kookmc.libs.net.kyori")
@@ -89,6 +88,11 @@ tasks {
         exclude("META-INF/versions/**")
         dependencies {
             exclude(dependency("org.slf4j:slf4j-api:.*"))
+            exclude(dependency("org.apache.logging.log4j:log4j-api:.*"))
+            exclude(dependency("org.apache.logging.log4j:log4j-core:.*"))
+            exclude(dependency("org.apache.logging.log4j:log4j-slf4j-impl:.*"))
+            exclude(dependency("uk.org.lidalia:sysout-over-slf4j:.*"))
+            exclude(dependency("org.jetbrains:annotations:.*"))
         }
         archiveFileName.set("${rootProject.name}-${version}.jar")
     }
