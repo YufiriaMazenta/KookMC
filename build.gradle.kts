@@ -31,7 +31,7 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 java.targetCompatibility = JavaVersion.VERSION_1_8
 
 publishing {
-    var repositoryUrl = "http://repo.crypticlib.com:8081/repository/"
+    var repositoryUrl = "https://repo.crypticlib.com:8081/repository/"
     repositoryUrl = if (rootProject.version.toString().endsWith("SNAPSHOT")) {
         repositoryUrl.plus("maven-snapshots/")
     } else {

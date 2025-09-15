@@ -8,9 +8,7 @@
 
 ```kotlin
 repositories {
-    maven("http://repo.crypticlib.com:8081/repository/maven-public/") {
-        isAllowInsecureProtocol = true
-    }
+    maven("https://repo.crypticlib.com:8081/repository/maven-public/")
 }
 
 dependencies {
