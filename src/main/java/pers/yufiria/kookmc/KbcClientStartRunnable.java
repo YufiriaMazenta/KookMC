@@ -60,7 +60,7 @@ public class KbcClientStartRunnable extends CrypticLibRunnable {
     }
 
     private void regDefCommand() {
-        KookMC.getInstance().regKookCommand(new JKookCommand("debug", "/").executesUser(
+        KookMCAPI.registerCommand(new JKookCommand("debug", "/").executesUser(
             (sender, arguments, message) -> {
                 if (message != null) {
                     StringBuilder contentBuilder = new StringBuilder();

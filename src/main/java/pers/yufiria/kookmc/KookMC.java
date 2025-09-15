@@ -1,7 +1,9 @@
 package pers.yufiria.kookmc;
 
 import crypticlib.BukkitPlugin;
+import pers.yufiria.kookmc.event.KookEventForwarder;
 import snw.jkook.command.JKookCommand;
+import snw.jkook.event.Listener;
 import snw.kookbc.impl.KBCClient;
 
 import java.util.Optional;
@@ -44,15 +46,6 @@ public final class KookMC extends BukkitPlugin {
             return Optional.ofNullable(kbcClientStartRunnable.getKbcClient());
         }
         return Optional.empty();
-    }
-
-    public boolean regKookCommand(JKookCommand command) {
-        Optional<KBCClient> kookClientOpt = getKookClient();
-        if (kookClientOpt.isEmpty()) {
-            return false;
-        }
-        command.register(kookClientOpt.get().getInternalPlugin());
-        return true;
     }
 
 }
