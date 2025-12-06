@@ -4,6 +4,7 @@ import pers.yufiria.kookmc.KookMCAPI;
 import snw.jkook.command.JKookCommand;
 import snw.jkook.event.Listener;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -26,13 +27,13 @@ public final class KookRegisterableCache {
     }
 
     public static void register() {
-        List<JKookCommand> jKookCommands = Collections.unmodifiableList(cacheCommands);
+        List<JKookCommand> jKookCommands = new ArrayList<>(cacheCommands);
         cacheCommands.clear();
         for (JKookCommand jKookCommand : jKookCommands) {
             KookMCAPI.registerCommand(jKookCommand);
         }
 
-        List<Listener> listeners = Collections.unmodifiableList(cacheListeners);
+        List<Listener> listeners = new ArrayList<>(cacheListeners);
         cacheListeners.clear();
         for (Listener listener : listeners) {
             KookMCAPI.registerEvents(listener);
