@@ -2,9 +2,12 @@ package pers.yufiria.kookmc;
 
 import crypticlib.scheduler.CrypticLibRunnable;
 import crypticlib.util.IOHelper;
+import org.bukkit.Bukkit;
 import pers.yufiria.kookmc.config.BotConfigs;
 import pers.yufiria.kookmc.config.Messages;
+import pers.yufiria.kookmc.event.KookClientLoadedEvent;
 import pers.yufiria.kookmc.event.KookEventForwarder;
+import pers.yufiria.kookmc.internal.KookRegisterableCache;
 import snw.jkook.JKook;
 import snw.jkook.command.JKookCommand;
 import snw.jkook.config.ConfigurationSection;
@@ -45,7 +48,9 @@ public class KbcClientStartRunnable extends CrypticLibRunnable {
             kbcClient.getCore().getEventManager().registerHandlers(kbcClient.getInternalPlugin(), KookEventForwarder.INSTANCE);
             ((CommandManagerImpl) kbcClient.getInternalPlugin().getCore().getCommandManager()).getCommandMap().unregisterAll(kbcClient.getInternalPlugin());
             IOHelper.info(Messages.botStarted.value());
+            Bukkit.getPluginManager().callEvent(new KookClientLoadedEvent());
             regDefCommand();
+            KookRegisterableCache.register();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
